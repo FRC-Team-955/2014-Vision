@@ -54,13 +54,13 @@ public class Vision
             for(int i = 0; i < particleReportLength; i++)
             {
                 Rectangle target = new Rectangle();
-                target.setHeight(NIVision.MeasureParticle(image.image, i, false, NIVision.MeasurementType.IMAQ_MT_BOUNDING_RECT_HEIGHT));
-                target.setWidth(NIVision.MeasureParticle(image.image, i, false, NIVision.MeasurementType.IMAQ_MT_BOUNDING_RECT_WIDTH));
-                double distance = ((vertTarget.getHeight()/ target.getHeight()) * resHalfY) / MyMath.tan(viewAngleVert);
+                target.setHeight(NIVision.MeasureParticle(filteredImage.image, i, false, NIVision.MeasurementType.IMAQ_MT_BOUNDING_RECT_HEIGHT));
+                target.setWidth(NIVision.MeasureParticle(filteredImage.image, i, false, NIVision.MeasurementType.IMAQ_MT_BOUNDING_RECT_WIDTH));
+                double distance = ((vertTarget.getHeight() / target.getHeight()) * resHalfY) / MyMath.tan(viewAngleVert);
                 
                 if(target.getWidth() > target.getHeight())
                 {
-                    distance = ((horizTarget.getHeight()/ target.getHeight()) * resHalfY) / MyMath.tan(viewAngleVert);
+                    distance = ((horizTarget.getHeight() / target.getHeight()) * resHalfY) / MyMath.tan(viewAngleVert);
                     foundHotTarget = true;
                 }
 
