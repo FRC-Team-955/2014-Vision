@@ -7,8 +7,9 @@
 
 package core;
 
-
 import edu.wpi.first.wpilibj.IterativeRobot;
+import util.Config;
+import util.MyJoystick;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -17,37 +18,37 @@ import edu.wpi.first.wpilibj.IterativeRobot;
  * creating this project, you must also update the manifest file in the resource
  * directory.
  */
-public class Main extends IterativeRobot {
-    
-    Vision vision;
-    
+public class Main extends IterativeRobot 
+{
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
-    public void robotInit() {
-        vision = new Vision();
+	MyJoystick joy;
+	Vision vision;
+	
+    public void robotInit() 
+	{
+		System.out.println("Vision Code!");
+		joy.setAxisChannel(MyJoystick.AxisType.kX, 3);
+        joy.setAxisChannel(MyJoystick.AxisType.kY, 2);
+		joy = new MyJoystick(Config.chnJoystick, Config.buttonsOnJoystick);
+		vision = new Vision(joy);
     }
 
     /**
      * This function is called periodically during autonomous
      */
-    public void autonomousPeriodic() {
-        vision.update();
-        //System.out.println(vision.foundHotTarget());
+    public void autonomousPeriodic() 
+	{
+
     }
 
     /**
      * This function is called periodically during operator control
      */
-    public void teleopPeriodic() {
-    }
-    
-    /**
-     * This function is called periodically during test mode
-     */
-    public void testPeriodic() {
-    
-    }
-    
+    public void teleopPeriodic() 
+	{
+		vision.run();
+    }    
 }
